@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { LoginForm } from "./LoginForm";
 
 
 export class LandingPage{
@@ -19,7 +20,7 @@ export class LandingPage{
         this.cartLink = page.locator('a',{hasText: 'Cart'});
         this.loginLink = page.locator('a', {hasText: 'Log in'});
         this.signupLink = page.locator('a',{hasText: 'Sign up'});
-        this.landingPageURL = 'https://demoblaze.com/';
+        this.landingPageURL = 'https://demoblaze.com/index.html';
     }
 
     async launchLandingPage(){
@@ -39,11 +40,16 @@ export class LandingPage{
     }
 
     async clickCartLink(){
-        await this.cartLink.click();
+        
+        this.cartLink.click()
+        
     }
 
-    async clickLoginLink(){
-        await this.loginLink.click();
+    async clickLoginLink():Promise<LoginForm>{
+        await Promise.all([
+            this.loginLink.click()
+        ]);
+        return new LoginForm(this.page);
     }
 
     async clickSignUpLink(){
