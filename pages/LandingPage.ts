@@ -20,11 +20,16 @@ export class LandingPage{
         this.cartLink = page.locator('a',{hasText: 'Cart'});
         this.loginLink = page.locator('a', {hasText: 'Log in'});
         this.signupLink = page.locator('a',{hasText: 'Sign up'});
-        this.landingPageURL = 'https://demoblaze.com/index.html';
+        this.landingPageURL = process.env.BASE_URL || 'http://localhost:3000';
     }
 
     async launchLandingPage(){
-        await this.page.goto(this.landingPageURL);
+        //This will take the baseURL from the config file. 
+        //And the config file is taking the baseURL from the .env file.
+        // And the .env file is determined by the NODE_ENV variable in the command line.
+        // If there is a resource to go to, append to the baseURL in the goto() method.
+        // For example, await this.page.goto('/products');
+        await this.page.goto(''); 
     }
 
     async clickHomeLink(){

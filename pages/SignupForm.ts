@@ -3,7 +3,7 @@ import { HomePage } from "./HomePage";
 import generalPurpose from "../utils/generalPurpose";
 
 
-export class LoginForm{
+export class SignupForm{
     readonly page: Page;
     readonly usernameTextBox: Locator;
     readonly passwordTextBox: Locator;
@@ -11,8 +11,8 @@ export class LoginForm{
 
     constructor(page:Page){
         this.page = page;
-        this.usernameTextBox = page.locator('#loginusername');
-        this.passwordTextBox = page.locator('#loginpassword');
+        this.usernameTextBox = page.locator('#sign-username');
+        this.passwordTextBox = page.locator('#sign-password');
         this.loginButton = page.getByRole('button', { name: 'Log in' });
     }
 
