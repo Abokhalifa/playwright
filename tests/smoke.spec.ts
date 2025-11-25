@@ -12,7 +12,7 @@ test.describe.only('Smoke test is running.....',()=>{
         const homePage:HomePage = await loginForm.clickLoginButton();
         await expect(homePage.logoutLink).toBeVisible();
         const welcomeMessage: string = await homePage.getWelcomeMessageText();
-        expect(welcomeMessage).toContain('Welcome');
+        expect(welcomeMessage).toContain('welcome'); //Case-sensitive
         console.log(welcomeMessage);
         
   });
