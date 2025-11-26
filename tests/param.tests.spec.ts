@@ -10,26 +10,26 @@ test.beforeEach(async({page})=>{
     await landingPage.launchLandingPage();
     })
 
-test.describe.only('Smoke test is running.....',()=>{
 
+    const uniqueId= () => Date.now() - Math.floor(Math.random()*1000)
+test.describe(`Sign up tests.....`,()=>{
     [
         {
-            name: 'Alice',
-            password: 'alice123'
+            username: `user`+uniqueId(),
+            password: 'pass1234'
         },
         {
-            name: 'Bob',
-            password: 'bob123' 
-        }
-    ].forEach(({name, password})=>{
-        test(`Verify the welcome message for ${name}.`, async ({ page }) => {
-            const loginForm:LoginForm = await landingPage.clickLoginLink();
-            await loginForm.fillinLoginForm(name, password);
-            const homePage:HomePage = await loginForm.clickLoginButton();
-    ]
-    test.only('Sign up.', async ({page})=>{
+            username: `testuser`+uniqueId(),
+            password: 'mypassword'
+        },
+        {
+            username: `alice`+uniqueId(),
+            password: 'alice123'
+        },
+    ].forEach(({username, password})=>{
+        test(`Sign up ${username}.`, async ({page})=>{
          const signupForm:SignupForm = await landingPage.clickSignupLink();
-         await signupForm.fillinSignupForm();
+         await signupForm.fillinSignupForm(username,password);
          //Listen for the dialog and accept it
          page.on('dialog', async dialog => {
              console.log(`Dialog message: ${dialog.message()}`);
@@ -42,14 +42,6 @@ test.describe.only('Smoke test is running.....',()=>{
 
     });
 });
-
-test.describe('Landing page links',()=>{
-    test('Click the Home link.',async({page})=>{
-        const landingPage = new LandingPage(page);
-        await landingPage.launchLandingPage();
-        await landingPage.clickHomeLink();
-
-    });
 });
 
 

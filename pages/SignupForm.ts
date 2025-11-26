@@ -16,13 +16,20 @@ export class SignupForm{
         this.signupButton = page.getByRole('button', { name: 'Sign up' });
     }
 
-    async fillinSignupForm(){
+    async fillinSignupForm(username?:string,password?:string):Promise<void>{
         const randomUsername = generateRandomText(8);
+        await console.log("-----------Generated Random Username-----------");
         await console.log(randomUsername);
+        await console.log("----------------Environment Variables----------------");
         await console.log(process.env.USERNAME);
         await console.log(process.env.PASSWORD);
-        await this.usernameTextBox.fill(randomUsername  || "Abokhalifa");
-        await this.passwordTextBox.fill(process.env.PASSWORD || "test123");
+        await console.log("----------------Passed params----------------");
+        await console.log(username);
+        await console.log(password);
+
+
+        await this.usernameTextBox.fill(username  || "Abokhalifa");
+        await this.passwordTextBox.fill(password || "test123");
     }
 
     async clickSignupButton():Promise<HomePage>{
