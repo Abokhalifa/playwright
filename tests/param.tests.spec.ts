@@ -11,15 +11,22 @@ test.beforeEach(async({page})=>{
     })
 
 test.describe.only('Smoke test is running.....',()=>{
-    test('Verify the welcome messaage.', async ({ page }) => {
-        const loginForm:LoginForm = await landingPage.clickLoginLink();
-        await loginForm.fillinLoginForm();
-        const homePage:HomePage = await loginForm.clickLoginButton();
-        await expect(homePage.logoutLink).toBeVisible();
-        const welcomeMessage: string = await homePage.getWelcomeMessageText();
-        expect(welcomeMessage).toContain('welcome'); //Case-sensitive
-        console.log(welcomeMessage);   
-  });
+
+    [
+        {
+            name: 'Alice',
+            password: 'alice123'
+        },
+        {
+            name: 'Bob',
+            password: 'bob123' 
+        }
+    ].forEach(({name, password})=>{
+        test(`Verify the welcome message for ${name}.`, async ({ page }) => {
+            const loginForm:LoginForm = await landingPage.clickLoginLink();
+            await loginForm.fillinLoginForm(name, password);
+            const homePage:HomePage = await loginForm.clickLoginButton();
+    ]
     test.only('Sign up.', async ({page})=>{
          const signupForm:SignupForm = await landingPage.clickSignupLink();
          await signupForm.fillinSignupForm();

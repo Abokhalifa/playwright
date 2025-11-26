@@ -1,5 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { LoginForm } from "./LoginForm";
+import { SignupForm } from "./SignupForm";
 
 
 export class LandingPage{
@@ -57,7 +58,10 @@ export class LandingPage{
         return new LoginForm(this.page);
     }
 
-    async clickSignUpLink(){
-        await this.signupLink.click();
+    async clickSignupLink(){
+        await Promise.all([
+            this.signupLink.click()
+        ]); 
+        return new SignupForm(this.page);
     }
 }

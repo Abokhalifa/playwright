@@ -1,4 +1,4 @@
-function generateRandomText(length:number, characters?:string):string{
+export function generateRandomText(length:number, characters?:string):string{
     const defaultCharacters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     const charSet = characters || defaultCharacters;
     let result = '';
