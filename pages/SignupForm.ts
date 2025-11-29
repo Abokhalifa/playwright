@@ -1,6 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { HomePage } from "./HomePage";
 import { generateRandomText } from "../utils/GeneralPurpose";
+import { LandingPage } from "./LandingPage";
 
 
 export class SignupForm{
@@ -21,24 +22,30 @@ export class SignupForm{
         await console.log("-----------Generated Random Username-----------");
         await console.log(randomUsername);
         await console.log("----------------Environment Variables----------------");
-        await console.log(process.env.USERNAME);
-        await console.log(process.env.PASSWORD);
+        await console.log('User from env: '+process.env.USER_NAME); // This fetches the value of USER_NAME from the .env file.
+        await console.log('Local PC user: '+process.env.USERNAME); // This fetches the value of USERNAME from the system environment variable if exists i.e. the username of the logged in user on the OS.
+        await console.log('Password from env: '+process.env.PASSWORD);
         await console.log("----------------Passed params----------------");
         await console.log(username);
         await console.log(password);
 
 
-        await this.usernameTextBox.fill(username  || "Abokhalifa");
+        await this.usernameTextBox.fill(username  || "Abokhalifa"+randomUsername);
         await this.passwordTextBox.fill(password || "test123");
     }
 
-    async clickSignupButton():Promise<HomePage>{
+    async clickSignupButton():Promise<LandingPage>{
         await Promise.all([
             this.signupButton.click(),
             this.page.waitForEvent('dialog').then(dialog => dialog.accept()),
         ]);
-        return new HomePage(this.page);   
+        return new LandingPage(this.page);   
     }
+
+    async signupNewUser(username?:string, password?:string):Promise<LandingPage>{
+        await this.fillinSignupForm(username, password);
+        return this.clickSignupButton();
+    }  
 
     
 

@@ -31,7 +31,7 @@ test.describe.only('Smoke test is running.....',()=>{
          });
 
          //Triger the action that causes the dialog to appear.
-         const homePage:HomePage = await signupForm.clickSignupButton();
+         landingPage = await signupForm.clickSignupButton();
 
     });
 });
