@@ -30,7 +30,7 @@ export class SignupForm{
         await console.log(password);
 
 
-        await this.usernameTextBox.fill(username  || "Abokhalifa"+randomUsername);
+        await this.usernameTextBox.fill(username || "Abokhalifa"+randomUsername);
         await this.passwordTextBox.fill(password || "test123");
     }
 
@@ -45,13 +45,6 @@ export class SignupForm{
     async signupNewUser(username?:string, password?:string):Promise<LandingPage>{
         await this.fillinSignupForm(username, password);
         return this.clickSignupButton();
-    }  
-
-    
-
-
-
-
-    
+    }    
 
 }

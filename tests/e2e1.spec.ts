@@ -32,9 +32,8 @@ test.describe("Login using a new user signed up from param tests",()=>{
             await loginForm.fillinLoginForm(username, password);
             const homePage:HomePage = await loginForm.clickLoginButton();
             const welcomeMessage: string = await homePage.getWelcomeMessageText();
-            expect(welcomeMessage).toContain('welcome');
+            expect(welcomeMessage).toContain('Welcome');
             console.log(welcomeMessage);
             });
 
-           });
         });

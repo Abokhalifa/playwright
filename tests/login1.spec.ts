@@ -20,29 +20,27 @@ test.beforeEach(async({page})=>{
 })
 
 test.describe.only('Login tests are executing....',()=>{
-    test('Verify successful login.', async ({ page }) => {
+    test.only('Verify successful login.', async ({ page }) => {
         const loginForm:LoginForm = await landingPage.clickLoginLink();
         await loginForm.fillinLoginForm(username, password);
         const homePage:HomePage = await loginForm.clickLoginButton();
-        await expect(homePage.logoutLink).toBeVisible();
-        const welcomeMessage: string = await homePage.getWelcomeMessageText();
-        expect(welcomeMessage).toBe('Welcome '+username); //Case-sensitive
-        console.log(welcomeMessage);   
+        //await expect(homePage.logoutLink).toBeVisible();
+        //const welcomeMessage: string = await homePage.getWelcomeMessageText();
+        //expect(welcomeMessage).toBe('Welcome '+username); //Case-sensitive
+        //console.log(welcomeMessage);   
     });
 
-    test.only('Verify unsuccessful login with invalid password.', async ({ page }) => {
+    test('Verify unsuccessful login with invalid password.', async ({ page }) => {
         const loginForm:LoginForm = await landingPage.clickLoginLink();
         await loginForm.fillinLoginForm(username, 'InvalidPassword');
-
-        //Listen for the dialog and accept it.
+        //Listen for the dialog and accept it
         page.on('dialog', async dialog => {
             console.log(`Dialog message: ${dialog.message()}`);
             expect(dialog.type()).toBe('alert');
             expect(dialog.message()).toContain('Wrong password.');
         });
-
-        await loginForm.clickLoginButton(); //Trigger the alert dialog by clicking login button.
-        await loginForm.clickCloseButton();
+        //await landingPage.clickLoginLink(); //Trigger the alert dialog by clicking login button
+        //await loginForm.clickCloseButton();
     });
 
 

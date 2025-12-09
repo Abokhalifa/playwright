@@ -58,7 +58,7 @@ export class LandingPage{
         return new LoginForm(this.page);
     }
 
-    async clickSignupLink(){
+    async clickSignupLink():Promise<SignupForm>{
         await Promise.all([
             this.signupLink.click()
         ]); 

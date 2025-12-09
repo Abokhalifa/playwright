@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { HomePage } from "./HomePage";
-import generalPurpose from "../utils/generalPurpose";
+import { LandingPage } from "./LandingPage";
 
 
 export class LoginForm{
@@ -8,6 +8,7 @@ export class LoginForm{
     readonly usernameTextBox: Locator;
     readonly passwordTextBox: Locator;
     readonly loginButton: Locator;
+    readonly closeButton: Locator;
     
 
     constructor(page:Page){
@@ -15,10 +16,11 @@ export class LoginForm{
         this.usernameTextBox = page.locator('#loginusername');
         this.passwordTextBox = page.locator('#loginpassword');
         this.loginButton = page.getByRole('button', { name: 'Log in' });
+        this.closeButton = page.getByLabel('Log in').getByText('Close');
     }
 
     async fillinLoginForm(username?:string,password?:string):Promise<void>{
-        await this.usernameTextBox.fill(username  || "Abokhalifa");
+        await this.usernameTextBox.fill(username || "Abokhalifa");
         await this.passwordTextBox.fill(password || "test123");
     }
 
@@ -29,11 +31,11 @@ export class LoginForm{
         return new HomePage(this.page);   
     }
 
-    
-
-
-
-
-    
+    async clickCloseButton():Promise<LandingPage>{
+        await Promise.all([
+            this.closeButton.click()
+        ]);
+        return new LandingPage(this.page);
+    }  
 
 }
