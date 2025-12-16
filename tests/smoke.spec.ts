@@ -21,18 +21,19 @@ test.describe('Smoke test is running.....',()=>{
         console.log(welcomeMessage);   
         });
     test('Sign up.', async ({page})=>{
-         const signupForm:SignupForm = await landingPage.clickSignupLink(page);
+         const signupForm:SignupForm = await landingPage.clickSignupLink();
          await signupForm.fillinSignupForm();
          //Listen for the dialog and accept it
          page.on('dialog', dialog => {
              console.log(`Dialog message: ${dialog.message()}`);
              expect(dialog.type()).toBe('alert');
              expect(dialog.message()).toContain('Sign up successful.')
-             dialog.dismiss().catch(() => {});
+             
          });
 
          //Triger the action that causes the dialog to appear.
-         landingPage = await signupForm.clickSignupButton(page);
+         landingPage = await signupForm.clickSignupButton();
+         
 
         });   
     test('test', async ({ page }) => {

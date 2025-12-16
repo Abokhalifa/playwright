@@ -20,7 +20,7 @@ const randomNumber = `${Math.floor(Math.random() * 10000)}`;
         test(`Sign up ${username}`, async ({ page }) => {
                 const signupForm:SignupForm = await landingPage.clickSignupLink();
                 await signupForm.fillinSignupForm(username+randomNumber, password);
-                //Listen for the dialog and accept it
+                //Listen for the dialog and accept it.
                 page.on('dialog', async dialog => {
                     console.log(`Dialog message: ${dialog.message()}`);
                     expect(dialog.type()).toBe('alert');
