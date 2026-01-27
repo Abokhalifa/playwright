@@ -12,9 +12,9 @@ test.beforeEach(async({page})=>{
 
 test.describe('Smoke test is running.....',()=>{
     test.only('Verify the welcome messaage.', async ({ page }) => {
-        const loginForm:LoginForm = await landingPage.clickLoginLink(page);
+        const loginForm:LoginForm = await landingPage.clickLoginLink();
         await loginForm.fillinLoginForm();
-        const homePage:HomePage = await loginForm.clickLoginButton(page);
+        const homePage:HomePage = await loginForm.clickLoginButton();
         await expect(homePage.logoutLink).toBeVisible();
         const welcomeMessage: string = await homePage.getWelcomeMessageText();
         expect(welcomeMessage).toContain('Welcome'); //Case-sensitive
@@ -43,4 +43,5 @@ test.describe('Smoke test is running.....',()=>{
         await page.locator('#loginpassword').fill('test123');
         await page.getByRole('button', { name: 'Log in' }).click();
     });
+    
 });
