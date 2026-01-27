@@ -11,7 +11,7 @@ test.beforeEach(async({page})=>{
     })
 
 test.describe('Smoke test is running.....',()=>{
-    test.only('Verify the welcome messaage.', async ({ page }) => {
+    test('Verify the welcome messaage.', async ({ page }) => {
         const loginForm:LoginForm = await landingPage.clickLoginLink();
         await loginForm.fillinLoginForm();
         const homePage:HomePage = await loginForm.clickLoginButton();
