@@ -33,7 +33,8 @@ export class HomePage{
 
         async getWelcomeMessageText() : Promise<string | null> {
             const welcomeMessage: string = await this.welcomeLink.textContent();
-            return welcomeMessage.toLowerCase() ;
+            return welcomeMessage;
+            //return welcomeMessage.toLowerCase() ;
 
         }
 
