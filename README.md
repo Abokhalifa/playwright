@@ -16,8 +16,10 @@ npm init playwright
 * and all the test files are placed in a directory called "tests" in the root directory of the project.
 * Debug tests.	"npx playwright test --debug
 * or
-* PWDEBUG=1 NODE_ENV=staging npx playwright test --project='chromium' --headed smoke.spec.ts"
-* Common issues while running the tests in the CMD: 
+* PWDEBUG=1 NODE_ENV=staging npx playwright test --project='chromium' --headed smoke.spec.ts  (This works fine on Linux)
+* PWDEBUG=1 set NODE_ENV=staging| npx playwright test --headed --project="chromium" smoke.spec.ts (This works fine on Windows)
+* 
+* Common issues while running the tests in the CMD on Windows: 
   * To run tests from cmd, allow running them from cmd.	"* Run a powershell on windows and execute the following command as an admin:
   Set-ExecutionPolicy RemoteSigned
   For security purposes, it is recommended to revert back the execution policy to ""Restricted"" using the following command:
